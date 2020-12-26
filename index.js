@@ -1,47 +1,51 @@
 let express = require("express");
 let app = express();
 const bodyParser = require('body-parser');
+let acc = require('./account.json');
+acc = acc.accounts;
 
-//MongoDB Connecttion!
-const MongoClient = require('mongodb').MongoClient;
-const uri = "mongodb+srv://admin:admin@cluster0.zo6aj.mongodb.net/Daftar_Pegawai?retryWrites=true&w=majority";
+//setting up body-parser
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
 
-const client = new MongoClient(uri, { useNewUrlParser: true });
-client.connect(err => {
-  const collection = client.db("test").collection("devices");
-  // perform actions on the collection object
-  console.log("Succeeded!!");
-  client.close();
-});
+app.post('/getPost', function(req,res){
+	let credential = JSON.stringify(req.body);
+	credential = JSON.parse(credential);
+	console.log(credential);
+	console.log(acc);
+	console.log(acc.length);
+	let bol = false;
+	for(var i=0;i<acc.length;i++){
+		if((acc[i].username === credential.username) && (acc[i].password === credential.password)){
+			console.log("succeded!")
+			res.redirect('/home');
+			bol = true;
+			break;
+		}
+	}
+	if(bol == false){
+		res.redirect('/failed');
+	}
 
+})
 
 //Route Express
 app.use(express.static('public'));
 
 app.get("/", function(req, res){
-	res.render('top.ejs');
+	res.render('login.ejs');
 });
-
-app.get("/remember", function(req,res){
-	res.render('remember.ejs');
+app.get("/retrieve", function(req, res){
+	res.render('retrieve.ejs');
 });
-app.get("/test", function(req, res){
-	res.redirect("/home");
-})
 app.get("/home", function(req, res){
 	res.render('home.ejs');
-})
-
-//setting up body-parser
-app.use(bodyParser.urlencoded({extended: true}))
-
-app.post("/signup", function(req, res){
-	ans = req.body
-	console.log(ans);
-	ans.
-	res.redirect()
+});
+app.get("/failed", function(req, res){
+	res.render('failed.ejs');
 });
 
 
 
+console.log('working!');
 app.listen(3000);
