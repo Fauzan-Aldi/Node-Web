@@ -1,0 +1,182 @@
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="/public/css/home_style.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+		<script type="text/javascript" src="https://www.gstatic.com/firebasejs/4.3.0/firebase.js"></script>
+		<!-- TODO: Add SDKs for Firebase products that you want to use-->
+		<script type="text/javascript" src="/public/js/firebase-config.js"></script>
+	</head>
+	<body>
+		<div class="app-container">
+			<div class="apps">
+				<div class="menu-bar">
+					<div class="menu-bar-container">
+						<div class="title">
+							<img id="teamup-logo"src="https://cdn.discordapp.com/attachments/730225043396886570/731734900796817429/d39e41ea7348250c07785e5f671427be.png">
+							<h1>Team Up</h1>
+						</div>
+						<img id="profile-img" src="https://avatars3.githubusercontent.com/u/55005873?s=400&v=4" alt="profile">
+						<p id="profile-name"><b>WazeAzure</b></p>
+						<hr>
+						<ul>
+							<li>Dashboard</li>
+							<li>Chat</li>
+							<li>Worker List</li>
+							<li>Worker Edit</li>
+							<li>Sallary</li>
+							<li>Support</li>
+							<li>Others</li>
+						</ul>
+					</div>
+				</div>
+				<header>
+					<div class="header-container">
+						<ul>
+							<li><a href="https://www.google.com/">asdas</a> </li>
+							<li></li>
+							<li></li>
+						</ul>
+					</div>
+				</header>
+				<div class="view">
+					<div class="view-container">
+					<!-- Start of Dashboard -->
+						<div class="graphing">
+							<div class="graphing-container">
+								<div class="overview">
+									<canvas id="worker-per-months" aria-label="Hello ARIA World" role="img">
+										<p>Hello Fallback World</p>
+									</canvas>
+								</div>
+								<br>
+								<div class="gender-ratio">
+									<canvas id="gender-ratio" width="800px" height="500px" aria-label="Hello ARIA World" role="img">
+										<p>Hello Fallback World</p>
+									</canvas>
+								</div>
+								<div class="fired">
+									<canvas id="fired" width="1000px" height="300px" aria-label="Hello ARIA World" role="img">
+										<p>Hello Fallback World</p>
+									</canvas>
+								</div>
+							</div>
+						</div>
+					<!-- End of Dashboard -->
+					<!-- Start of Chat -->
+						<div class="chat hidden">
+							<div class="chat-container">
+								<div id="homepage">
+									<h1>Hello Welcome to My Chatroom</h1>
+									<input type="text" id="nama_user" placeholder="username">
+									<button id="submit_name">Masuk !</button>
+								</div>
+								<div id="chatroom" class="hidden">
+									<div id="rightBox">
+										<ul id="messages" class="overflow"></ul>
+									</div>
+									<div id="leftBox">
+										<h1>List Online Users</h1>
+										<ul id="user_lists"></ul>
+									</div>
+									<form id="MyForm">
+										<input type="text" id="text_box">
+										<button id="MyButton">Kirim</button>
+									</form>
+								</div>
+							</div>
+						</div>
+					<!-- End of Chat -->
+					<!-- Start of Worker List -->
+						<div class="worker-list hidden">
+							<div class="worker-list-container">
+								<h1>This is Worker List!</h1>
+								<button onclick="filterAll()">All</button>
+								<button onclick="filterCEO()">CEO</button>
+								<button onclick="filterCoFounder()">Co-Founder</button>
+								<button onclick="filterEmployee()">Employee</button>
+								<p>Search By Name</p>
+								<input type="text" name="nama" id="input_nama">
+								<button onclick="filterName()">Submit</button>
+								<hr>
+								<ul id="worker"></ul>
+							</div>
+						</div>
+					<!-- End of Worker List -->
+					<!-- Start of Worker Edit -->
+						<div class="worker-edit hidden">
+							<div class="worker-edit-container">
+								<h1>This is Worker Edit!</h1>
+								<div class="form-input-worker">
+									<label for="nama">Name:</label>
+									<input id="nama_pegawai" type="text" name="nama" placeholder="Edbert Eddyson Gunawan" required>
+									<br>
+									<label for="jabatan">Jabatan:</label>
+									<input id="jabatan_pegawai" list="rank" name="jabatan" required>
+									<datalist id="rank">
+										<option value="CEO">
+										<option value="CFO">
+										<option value="CMO">
+										<option value="CTO">
+										<option value="Employee">
+										<option value="OB">
+									</datalist>
+									<br>
+									<label for="gender">Gender:</label>
+									<input type="radio" id="male" name="gender" value="pria">
+									<label for="male">Pria</label>
+									<input type="radio" id="female" name="gender" value="wanita">
+									<label for="female">Wanita</label><br>
+									<br>
+									<label for="tempat">Tempat:</label>
+									<input id="tempat_pegawai" type="text" name="tempat" required>
+									<label for="tanggal_lahir">Tanggal Lahir:</label>
+									<input id="lahir_pegawai"type="date" name="tanggal_lahir" required>
+									<br>
+									<label for="email">Email:</label>
+									<input id="email_pegawai" type="email" name="email" pattern="[a-Z0-9._%+-]+@[a-Z0-9.-]+\.[a-z]{2,}$" placeholder="name@email.com" required>
+									<br>
+									<label for="telepon">Telepon:</label>
+									<input id="tel_pegawai" type="tel" name="telepon" placeholder="+62-853-877-13913" required>
+									<input type="reset">
+									<button id="worker-submit" onclick="addPegawai()">Submit</button>
+								</div>
+							</div>
+						</div>
+					<!-- End of Worker List -->
+					<!-- Start of Sallary -->
+						<div class="sallary hidden">
+							<div class="sallary-container">
+								<h1>This is Sallary!</h1>
+							</div>
+						</div>
+					<!-- End of Sallary -->
+					<!-- Start of Support -->
+						<div class="support hidden">
+							<div class="support-container">
+								<h1>This is Support!</h1>
+							</div>
+						</div>
+					<!-- End of Support -->
+					<!-- Start of Others -->
+						<div class="others hidden">
+							<div class="others-container">
+								<h1>This is others!</h1>
+							</div>
+						</div>
+					<!-- End of Others -->
+					</div>
+				</div>
+			</div>
+			<footer>
+				<div class="footer-container">
+				</div>
+			</footer>
+		</div>
+	<script src="/socket.io/socket.io.js"></script>
+	<script type="text/javascript" src="/public/js/home_script.js"></script>
+	</body>
+</html>
