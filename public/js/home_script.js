@@ -1,6 +1,31 @@
+//clicked
+function asw(el){
+	clName = el.className.split(' ')[2]
+	console.log(clName);
+	swal({
+		title: "Are You Sure?",
+		text: "Once deleted, you will not be able to revocer it!",
+		icon: "warning",
+		buttons: true,
+		dangerMode: true,
+	})
+	.then ((willDelete) => {
+		if(willDelete){
+			deleteData(clName);
+			swal("Deleted!", {
+				icon: "success",
+			});
+		} else {
+			swal("Ok Then :v");
+		}
+	})
+}
 
+function editProfile(el){
+	clName = el.className.split(' ')[2]
+	
+}
 
-console.log('LoL');
 //for clicked animation
 $('.menu-bar-container li').on('click', function(){
 	$('.menu-bar-container li').removeClass('clicked');
@@ -83,6 +108,28 @@ var overviewChart = new Chart(ctx, {
     }
 });
 
+
+//Display Total Worker
+function displayTotalWorker(items){
+	document.getElementById('totalWorker').innerHTML = Object.keys(items.toJSON()).length;
+}
+
+//Display Total NEW Worker
+function displayTotalNewWorker(items){
+	let newWorker = 0;
+	items.forEach((item) => {
+		let x = item.val();
+		x = x.TTL;
+		x = x.split(':');
+		x = x[1].split('-');
+		x = x[0];
+		if(x == Date().split(' ')[3]){
+			newWorker += 1;
+		}
+	})
+	document.getElementById('totalNewWorker').innerHTML = newWorker;
+}
+
 //Counting gender
 function countGender(items){
 	let pria = wanita = 0;
@@ -107,12 +154,12 @@ var genderChart = new Chart(ctx, {
 		datasets: [{
 			data: [0,0],
 			backgroundColor: [
-				'rgba(255, 99, 132, 1)',
-				'rgba(54, 162, 235, 1)'	
+				'rgba(54, 162, 235, 1)',
+				'rgba(255, 99, 132, 1)'
 			],
 			borderColor: [
-				'rgba(255, 99, 132, 1)',
-				'rgba(54, 162, 235, 1)'
+				'rgba(54, 162, 235, 1)',
+				'rgba(255, 99, 132, 1)'
 			],
 			borderWidth: 1
 		}]
@@ -127,12 +174,12 @@ function updateGenderChart(pria,wanita){
 	genderChart.data.datasets = [{
 			data: [pria,wanita],
 			backgroundColor: [
-				'rgba(255, 99, 132, 1)',
-				'rgba(54, 162, 235, 1)'	
+				'rgba(54, 162, 235, 1)',
+				'rgba(255, 99, 132, 1)'
 			],
 			borderColor: [
-				'rgba(255, 99, 132, 1)',
-				'rgba(54, 162, 235, 1)'
+				'rgba(54, 162, 235, 1)',
+				'rgba(255, 99, 132, 1)'
 			],
 			borderWidth: 1
 		}]
