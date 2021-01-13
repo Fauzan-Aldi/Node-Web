@@ -44,6 +44,9 @@ app.get("/home", function(req, res){
 app.get("/failed", function(req, res){
 	res.render(__dirname + '/views/failed.ejs');
 });
+app.get("*", function(req,res){
+	res.render(__dirname + '/views/error.ejs')
+})
 
 //Chat App using soket.io
 var http = require('http').Server(app);
