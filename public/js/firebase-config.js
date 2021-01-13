@@ -16,10 +16,11 @@ firebase.initializeApp(firebaseConfig);
 
 var db = firebase.database();
 var idPegawai = db.ref('idPegawai');
-idPegawai.orderByChild('nama').on('value', showData, showError);
+
 
 //adding Worker Profile
 function addPegawai(){
+	
 	let date = new Date();
 	let nama = $('#nama_pegawai').val();
 	let gender = document.querySelector('input[name="gender"]:checked').value;
@@ -28,7 +29,8 @@ function addPegawai(){
 	let lahir = $('#lahir_pegawai').val();
 	let email = $('#email_pegawai').val();
 	let tel = $('#tel_pegawai').val();
-	let umur = lahir.split('-')
+	let umur = lahir.split('-');
+	let Acc = date.getFullYear();
 	umur = parseInt(date.getFullYear()) - parseInt(umur[0]) ;
 	
 	idPegawai.push({
@@ -37,15 +39,29 @@ function addPegawai(){
 		gender: gender,
 		jabatan: jabatan,
 		TTL: `${tempat}:${lahir}`,
+		Acc: Acc,
 		email: email,
 		tel: tel
 	})
+		swal({
+  title: "Worker is Added!",
+  text: "Thankyou For Fillingin!",
+  icon: "success",
+});
+preventDefault();
+}
+
+//Delete Data
+function deleteData(key){
+	console.log(key);
+	idPegawai.child(key).remove();
 }
 
 //display Data
 function showData(items){
 	let content = '';
 	let list = $('#worker');
+	list.empty();
 	
 	items.forEach((item) => {
 		let x = item.val();
@@ -64,15 +80,26 @@ function showData(items){
 							<div class="skill">
 								<canvas></canvas>
 							</div>
+							<button onclick='asw(this)' class='fa fa-times ${item.key}'></button>
+							<button onclick='editProfile(this)' class='fa fa-pen ${item.key}'></button>
 						</div>
 					</li>`;
 	})
+	console.log(items.val());
+	
 	list.append(content);
 	console.log(list);
+	
+	//Display Total Worker
+	displayTotalWorker(items);
+	
+	//Display New Member
+	displayTotalNewWorker(items);
 	
 	//hitung ulang gender
 	countGender(items);
 }
+idPegawai.orderByChild('nama').on('value', showData, showError);
 function showError(err){
 	console.log(err);
 }
