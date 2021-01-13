@@ -4,6 +4,7 @@
 		<link rel="stylesheet" href="/public/css/home_style.css">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
+		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 		<script type="text/javascript" src="https://www.gstatic.com/firebasejs/4.3.0/firebase.js"></script>
@@ -11,6 +12,19 @@
 		<script type="text/javascript" src="/public/js/firebase-config.js"></script>
 	</head>
 	<body>
+	<!--Modal For Edit!-->
+		<div class="edit-modal">
+			<div class="edit-modal-container">
+				<div class="edit-form">
+					<label for="edit-name">Nama:</label>
+					<input type="text" name="edit-name">
+					<label for="edit-rank">Jabatan</label>
+					<input type="text" name="edit-rank">
+					<label for="edit-wage">Gaji:</label>
+					<input type="text" name="edit-wage">
+				</div>
+			</div>
+		</div>
 		<div class="app-container">
 			<div class="apps">
 				<div class="menu-bar">
@@ -47,21 +61,39 @@
 					<!-- Start of Dashboard -->
 						<div class="graphing">
 							<div class="graphing-container">
-								<div class="overview">
+								<div class="total-employee">
+									<p>Total Employee</p>
+									<p id="totalWorker"></p>
+								</div>
+								<div class="new-employee">
+									<p>New Employee</p>
+									<p id="totalNewWorker"></p>
+								</div>
+								<div class="new-employee">
+									<p>Employee Rating's and Review</p>
+								</div>
+								<div class="gender-ratio white">
+									<canvas id="gender-ratio" aria-label="Hello ARIA World" role="img">
+										<p>Hello Fallback World</p>
+									</canvas>
+								</div>
+								<div class="birthday white">
+									<h1>HBD</h1>
+									<ul id="hbd">
+										
+									</ul>
+								</div>
+								<div class="overview white">
 									<canvas id="worker-per-months" aria-label="Hello ARIA World" role="img">
+									</canvas>
+								</div>
+								<div class="fired white">
+									<canvas id="fired" aria-label="Hello ARIA World" role="img">
 										<p>Hello Fallback World</p>
 									</canvas>
 								</div>
-								<br>
-								<div class="gender-ratio">
-									<canvas id="gender-ratio" width="800px" height="500px" aria-label="Hello ARIA World" role="img">
-										<p>Hello Fallback World</p>
-									</canvas>
-								</div>
-								<div class="fired">
-									<canvas id="fired" width="1000px" height="300px" aria-label="Hello ARIA World" role="img">
-										<p>Hello Fallback World</p>
-									</canvas>
+								<div class="support-center white">
+									<h1>Support!</h1>
 								</div>
 							</div>
 						</div>
@@ -110,7 +142,7 @@
 						<div class="worker-edit hidden">
 							<div class="worker-edit-container">
 								<h1>This is Worker Edit!</h1>
-								<div class="form-input-worker">
+								<form class="form-input-worker">
 									<label for="nama">Name:</label>
 									<input id="nama_pegawai" type="text" name="nama" placeholder="Edbert Eddyson Gunawan" required>
 									<br>
@@ -129,7 +161,7 @@
 									<input type="radio" id="male" name="gender" value="pria">
 									<label for="male">Pria</label>
 									<input type="radio" id="female" name="gender" value="wanita">
-									<label for="female">Wanita</label><br>
+									<label for="female">Wanita</label>
 									<br>
 									<label for="tempat">Tempat:</label>
 									<input id="tempat_pegawai" type="text" name="tempat" required>
@@ -137,13 +169,13 @@
 									<input id="lahir_pegawai"type="date" name="tanggal_lahir" required>
 									<br>
 									<label for="email">Email:</label>
-									<input id="email_pegawai" type="email" name="email" pattern="[a-Z0-9._%+-]+@[a-Z0-9.-]+\.[a-z]{2,}$" placeholder="name@email.com" required>
+									<input id="email_pegawai" type="email" name="email" placeholder="name@email.com" required>
 									<br>
 									<label for="telepon">Telepon:</label>
 									<input id="tel_pegawai" type="tel" name="telepon" placeholder="+62-853-877-13913" required>
 									<input type="reset">
 									<button id="worker-submit" onclick="addPegawai()">Submit</button>
-								</div>
+								</form>
 							</div>
 						</div>
 					<!-- End of Worker List -->
@@ -177,6 +209,7 @@
 			</footer>
 		</div>
 	<script src="/socket.io/socket.io.js"></script>
+
 	<script type="text/javascript" src="/public/js/home_script.js"></script>
 	</body>
 </html>
