@@ -2,28 +2,55 @@
 function asw(el){
 	clName = el.className.split(' ')[2]
 	console.log(clName);
-	swal({
-		title: "Are You Sure?",
-		text: "Once deleted, you will not be able to revocer it!",
-		icon: "warning",
-		buttons: true,
-		dangerMode: true,
+	Swal.fire({
+		title: 'Are you sure?',
+		text: "You won't be able to revert this!",
+		icon: 'warning',
+		showCancelButton: true,
+		cancelButtonColor: '#d33',
+		confirmButtonColor: '#3085d6',
+		confirmButtonText: 'Yes, delete it!'
 	})
 	.then ((willDelete) => {
-		if(willDelete){
-			deleteData(clName);
-			swal("Deleted!", {
-				icon: "success",
+		if(willDelete.isConfirmed){
+			swal.fire({
+				title: "Deleted!",
+				icon: "success"
 			});
+			deleteData(clName);
 		} else {
-			swal("Ok Then :v");
+			swal.fire("Ok Then :v");
 		}
 	})
 }
 
 function editProfile(el){
 	clName = el.className.split(' ')[2]
-	
+	Swal.fire({
+		title: 'Multiple inputs',
+		html:
+			'Nama<br><input id="swal-input1" class="swal2-input"><br>' +
+			'Gaji<br><input type="number"id="swal-input3" class="swal2-input"><br>' +
+			'Jabatan<br><input id="swal-input4" class="swal2-input" list="rank" name="jabatan"><datalist id="rank"><option value="CEO"><option value="CFO"><option value="CMO"><option value="CTO"><option value="Employee"><option value="OB"></datalist>',
+		focusConfirm: false,
+		showCancelButton: true,
+		preConfirm: () => {
+			return [
+			document.getElementById('swal-input1').value,
+			document.getElementById('swal-input3').value,
+			document.getElementById('swal-input4').value,
+			]
+		}
+	})
+	.then((lol) => {
+		if(lol.isConfirmed){
+			
+			arr = lol.value;
+			arr.push(clName);
+			console.log(arr);
+			editFix(arr);
+		}
+	})
 }
 
 //for clicked animation
@@ -325,6 +352,10 @@ function filterCoFounder(){
 function filterEmployee(){
 	$('#worker').children().addClass('hidden');
 	$('.Employee').removeClass('hidden');
+}
+function filterHRD(){
+	$('#worker').children().addClass('hidden');
+	$('.HRD').removeClass('hidden');
 }
 function filterName(){
 	$('#worker').children().addClass('hidden');

@@ -20,7 +20,6 @@ var idPegawai = db.ref('idPegawai');
 
 //adding Worker Profile
 function addPegawai(){
-	
 	let date = new Date();
 	let nama = $('#nama_pegawai').val();
 	let gender = document.querySelector('input[name="gender"]:checked').value;
@@ -28,10 +27,12 @@ function addPegawai(){
 	let tempat = $('#tempat_pegawai').val();
 	let lahir = $('#lahir_pegawai').val();
 	let email = $('#email_pegawai').val();
+	let wage = $('#gaji_pegawai').val();
 	let tel = $('#tel_pegawai').val();
 	let umur = lahir.split('-');
 	let Acc = date.getFullYear();
-	umur = parseInt(date.getFullYear()) - parseInt(umur[0]) ;
+	umur = parseInt(date.getFullYear()) - parseInt(umur[0]);
+	//let today = `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`;
 	
 	idPegawai.push({
 		nama: nama,
@@ -41,14 +42,19 @@ function addPegawai(){
 		TTL: `${tempat}:${lahir}`,
 		Acc: Acc,
 		email: email,
+		wage: wage,
 		tel: tel
+		
 	})
-		swal({
+	
+	$(".form-input-worker").submit(function(e){
+		e.preventDefault();
+	})
+		swal.fire({
   title: "Worker is Added!",
   text: "Thankyou For Fillingin!",
   icon: "success",
 });
-preventDefault();
 }
 
 //Delete Data
@@ -57,23 +63,55 @@ function deleteData(key){
 	idPegawai.child(key).remove();
 }
 
+//Edit Data
+function editFix(arr){
+	name = arr[0];
+	wage = arr[1];
+	rank = arr[2];
+	key = arr[3];
+	console.log(name + wage + rank);
+	
+	if(name != ''){
+		idPegawai.child(key).update({
+		'nama': arr[0]
+		});
+	}
+	if(wage != ''){
+		idPegawai.child(key).update({
+		'wage': arr[1]
+		});
+	}
+	if(rank != ''){
+		idPegawai.child(key).update({
+		'jabatan': arr[2]
+		});
+	}
+}
+
 //display Data
 function showData(items){
 	let content = '';
 	let list = $('#worker');
+	let foto = "";
 	list.empty();
 	
 	items.forEach((item) => {
 		let x = item.val();
+		if(x.gender == "wanita"){
+			foto = "public/images/female.jpg";
+		} else {
+			foto = "public/images/male.jpg";
+		}
 		content += `<li class='${x.jabatan} ${x.umur}'>
 						<div class='pekerja'>
 							<div class="img-worker">
-								<img alt="foto profil"></img>
+								<img src=${foto} class="foto-profile" alt="foto profil"></img>
 							</div>
 							<div class="worker-identity">
 								<p class='name'>${x.nama}</p>
-								<p>${x.umur}</p>
+								<p>${x.umur} tahun</p>
 								<p>${x.jabatan}</p>
+								<p>Rp${x.wage}</p>
 								<br>
 								<p class="kunci hidden">${item.key}</p>
 							</div>

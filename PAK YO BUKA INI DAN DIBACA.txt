@@ -1,0 +1,48 @@
+Pak Yo!
+
+ini saya buatnya menggunakan NodeJS
+Jadi, kalau bapak g ada nodeJS di komputer bapak g bakal bisa buka!!!
+
+install dulu node js nya...
+
+Habis tu kalau sudah, masuk ke folder nodWebApp (ini root folder dari proyek saya)
+
+trus ketik dari cmd
+
+npm install
+
+nanti run kan... trus kalau mau jalanin semua ini pakai
+
+node index.js
+
+Baru bapak buka browser (chrome), ketik
+
+localhost:3000
+
+PASTIKAN KOMPUTER KE CONNECT INTERNET YA!
+trus sudah deh.. btw, untuk pakyo
+
+username = yohanes
+password = yohanes123
+(list uname ama pw, ada di file accounts.json)
+
+lalu pak... coba bapak kasih salah password.. looks what happen
+coba bapak retrieve password (in development ya hehe)
+
+Coba bapak ketik link yg invalid
+
+localhost:3000/lol
+
+NOTES!!
+
+untuk live chat, harus ada beberapa org ya pak baru bisa..
+coba aha buka beberapa tab trus masuk...
+kalau mau chat online, pakai port forwarding.. saya pakai ngrok.io
+
+datanya silahkan dicoba2 tapi ini masih under heavy development trutama maslaah UI
+bapak boleh input pekerja dll.. tpai jangan di kotak katik kodenya ya... soalnya ini live database
+jadi kalau bapak dari localhost ubah (trus komputer ke konek internet), maka data di database jg bakal keubah
+
+
+TUGAS PAK YO SAYA TARO DI OTHERS
+

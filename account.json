@@ -10,6 +10,18 @@
 		"image":"",
 		"username":"Titi",
 		"password":"123"
+	},
+	{
+		"user":"Rafa",
+		"image":"",
+		"username":"rafa",
+		"password":"rafa123"
+	},
+	{
+		"user":"Pak Yo",
+		"image":"",
+		"username":"yohanes",
+		"password":"yohanes123"
 	}]
 }
 

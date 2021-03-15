@@ -10,6 +10,24 @@
 	display: none;
 }
 
+/*Edit Modal*/
+.edit-modal {
+	position: fixed;
+	background-color: rgba(100,100,100,0.5);
+	width: 100%;
+	height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.edit-modal-container {
+	width: 40%;
+	height: 100px;
+	background-color: white;
+	border-radius: 20px;
+}
+
 /*Header*/
 header {
 	height: 45px;
@@ -30,6 +48,7 @@ header {
 	position: fixed;
 	height: 45px;
 	background-color: dodgerblue;
+	z-index: 10;
 }
 #teamup-logo {
 	width: 35px;
@@ -211,9 +230,153 @@ header {
 .pekerja {
 	display: flex;
 	margin: 10px;
-	background-color: cyan;
 	padding: 10px;
+}
+#worker li:nth-child(odd) .pekerja{
+	background-color: rgba(230,230,230,0.6);
 }
 .del:hover {
 	color: red;
 }
+.foto-profile {
+	width: 100px;
+	height: auto;
+}
+
+/* Animation */
+.animasi {
+	position: relative;
+}
+.langit {
+	width: 1000px;
+	height: 500px;
+	background-image: url("../images/langit.png");
+	position: absolute;
+	background-size: cover;
+}
+.ombak {
+	width: 1000px;
+	height: 250px;
+	/*background-image: url("../foto/laut.png");*/
+	z-index: 1;
+	overflow: hidden;
+	position: absolute;
+	top: 350px;
+
+	left: 0;
+
+}
+.ombak-img {
+	width: 4000px;
+	height: 150px;
+	background-image: url("../images/road.jpg");
+	animation: ombak 15s linear infinite;
+	background-repeat: repeat-x;
+}
+@keyframes ombak{
+	100%{
+		transform: translateX(-1400px);
+	}
+}
+.car
+{
+	width: 400px;
+	left: 50%;
+	top: 270px;
+	transform: translateX(-50%);
+	position: absolute;
+	z-index: 2;
+}
+.car img
+{
+	width: 100%;
+	animation: car 1s linear infinite;
+}
+@keyframes car
+{
+	100%{
+		transform: translateY(-1px);
+	}
+	50%{
+		transform: translateY(1px);
+	}
+	0%{
+		transform: translateY(-1px);
+	}
+}
+.wheel
+{
+	left: 50%;
+	top: 350px;
+	transform: translateX(-50%);
+	position: absolute;
+	z-index:2;
+}
+.wheel img
+{
+	width: 72px;
+	height: 72px;
+	animation: wheel 1s linear infinite;
+}
+.back-wheel
+{
+	left: -165px;
+	position: absolute;
+}
+.front-wheel
+{ 
+	left: 80px;
+	position: absolute;
+}
+@keyframes wheel
+{
+	100%{
+		transform: rotate(360deg);
+	}
+}
+.town{
+	height: 390px;
+	width: 100%;
+	position: absolute;
+	top: 0px;
+	left: 0;
+	display: block;
+	z-index: 1;
+	
+	overflow: hidden;
+}
+.town-img {
+	height: 390px;
+	width: 5000%;
+	background-image: url("../images/town.png");
+	background-repeat: repeat-x;
+	animation: town 20s linear infinite;
+}
+
+@keyframes town{
+	100%{
+		transform: translatex(-1400px);
+	}
+}
+
+.sun {
+	width:150px;
+	left:10%;
+	top: 0;
+	transform: translateX(-50%);
+	position: absolute;
+	z-index: 2;
+}
+.sun img{
+	width: 110px;
+	animation: sun 10s linear infinite;
+}
+@keyframes sun{
+	100%{
+		transform: rotate(0deg);
+	}
+	0%{
+		transform: rotate(360deg);
+	}
+}
+/* Others-container */
