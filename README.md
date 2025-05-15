@@ -1,3 +1,4 @@
+
 Halo! 👋
 Saya buat proyek ini menggunakan **NodeJS**, jadi kalau di komputer kamu belum terpasang NodeJS, aplikasi ini tidak akan bisa dijalankan ya.
 
